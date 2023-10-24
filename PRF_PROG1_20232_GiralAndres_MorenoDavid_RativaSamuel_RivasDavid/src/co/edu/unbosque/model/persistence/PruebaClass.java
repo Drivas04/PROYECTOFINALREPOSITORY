@@ -1,5 +1,5 @@
 package co.edu.unbosque.model.persistence;
 
-public class Prueba {
+public class PruebaClass {
 
 }
