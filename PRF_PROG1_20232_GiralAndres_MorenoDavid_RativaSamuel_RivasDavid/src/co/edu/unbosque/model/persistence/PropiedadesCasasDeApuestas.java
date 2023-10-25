@@ -9,7 +9,7 @@ import java.util.Properties;
 public class PropiedadesCasasDeApuestas {
 
 	private Properties prop = new Properties();
-	private String config = "./Data/config.dat";
+	private String config = "./Data/config.properties";
 	
 	public String escribirPropiedades() {
 		prop.setProperty("Nombre de la casa de apuestas", "PikaBet");
