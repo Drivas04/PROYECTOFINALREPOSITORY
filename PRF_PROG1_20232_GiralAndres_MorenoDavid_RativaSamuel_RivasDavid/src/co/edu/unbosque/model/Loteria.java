@@ -2,32 +2,29 @@ package co.edu.unbosque.model;
 
 import java.io.Serializable;
 
-public class LoteriaDTO implements Serializable{
+public class Loteria extends JuegosDTO implements Serializable{
 
 	private static final long serialVersionUID = 1L;
 
-	private String name;
+	protected String[] nombre = {"Lotería de Bogotá", "Lotería de Boyacá", "Lotería del Cauca"+ "Lotería Cruz Roja"+ "Lotería de Cundinamarca",
+			"Lotería del Huila"+ "Lotería de Manizales"+ "Extra de Colombia"};
 	private int id;
 	private int numNumeros;
 	private int numSeries;
 	
-	public LoteriaDTO() {
-		
-	}
-	
-	public LoteriaDTO(String name, int id, int numNumeros, int numSeries) {
-		this.name = name;
-		this.id = id;
+	public Loteria(String nombreJuego, String tipoJuego, double presupuestoJuego, String[] nombre, int numNumeros, int numSeries) {
+		super(nombreJuego, tipoJuego, presupuestoJuego);
+		this.nombre = nombre;
 		this.numNumeros = numNumeros;
 		this.numSeries = numSeries;
 	}
 
-	public String getName() {
-		return name;
+	public String[] getNombre() {
+		return nombre;
 	}
 
-	public void setName(String name) {
-		this.name = name;
+	public void setName(String[] nombre) {
+		this.nombre = nombre;
 	}
 
 	public int getId() {
