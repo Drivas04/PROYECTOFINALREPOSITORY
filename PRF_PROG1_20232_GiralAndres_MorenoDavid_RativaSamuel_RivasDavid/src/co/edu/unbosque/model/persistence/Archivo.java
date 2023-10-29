@@ -1,6 +1,7 @@
 package co.edu.unbosque.model.persistence;
 
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -42,5 +43,18 @@ public class Archivo {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+	}
+	
+	public ArrayList<JuegosDTO> leerArchivo(File archivo){
+		ArrayList<JuegosDTO> juegos = new ArrayList<JuegosDTO>();
+		if(archivo.length()!=0) {
+			try {
+				entrada = new ObjectInputStream(new FileInputStream(archivo));
+				juegos = (ArrayList<JuegosDTO>) entrada.readObject();
+			} catch (Exception e) {
+				// TODO: handle exception
+			}
+		}
+		return juegos;
 	}
 }
