@@ -29,7 +29,17 @@ public class Controller implements ActionListener{
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		// TODO Auto-generated method stub
+		//panelPrincipal
+		if(e.getActionCommand().equals(ventanaP.getPanelP().INGRESAR)) {
+			ventanaP.getPanelP().setVisible(false);
+			ventanaP.getPanelEleccion().setVisible(true);
+			ventanaP.resize(500,200);
+			ventanaP.setLocationRelativeTo(null);
+		}
 		
+		//panelEleccion
+		if(e.getActionCommand().equals(ventanaP.getPanelEleccion().BALOTO)) {
+			
+		}
 	}
 }

@@ -20,7 +20,7 @@ public class Archivo {
 	
 	public Archivo(File archivo) {
 		if(archivo.exists()) {
-			JOptionPane.showMessageDialog(null, "El archivo ya existe");
+			
 		}
 		else {
 			try {
