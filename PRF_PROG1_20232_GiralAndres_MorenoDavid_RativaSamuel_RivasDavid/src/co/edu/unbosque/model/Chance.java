@@ -9,7 +9,7 @@ public class Chance extends Loteria implements Serializable{
 	private int numerosElegidos;
 	
 	public Chance(String nombreJuego, String tipoJuego, double presupuestoJuego, String[] nombre, int numerosElegidos) {
-		super(nombreJuego, tipoJuego, presupuestoJuego, nombre, 0, 0);
+		super(nombreJuego = "Chance", tipoJuego = "Chance", presupuestoJuego, nombre, 0, 0);
 		this.numerosElegidos = numerosElegidos;
 	}
 

@@ -8,8 +8,8 @@ public class SuperAstro extends JuegosDTO implements Serializable{
 	private int numCifras;
 	private String[] signoZodiacal = {"ARIES", "TAURO", "GEMINIS", "CANCER", "LEO", "VIRGO", "LIBRA", "ESCORPIO","SAGITARIO","CAPRICORNIO", "ACUARIO","PISCIS"};
 	
-	public SuperAstro(String nombreJuego, String tipoJuego, double presupuestoJuego, int numCifras, String[] signoZodiacal) {
-		super(nombreJuego, tipoJuego, presupuestoJuego);
+	public SuperAstro(String nombreJuego , String tipoJuego, double presupuestoJuego, int numCifras, String[] signoZodiacal) {
+		super(nombreJuego = "SuperAstro", tipoJuego = "Loteria", presupuestoJuego);
 		this.numCifras = numCifras;
 		this.signoZodiacal = signoZodiacal;
 	}

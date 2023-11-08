@@ -4,7 +4,7 @@ import java.io.Serializable;
 
 public class JuegosDTO implements Serializable{
 
-	private static final long serialVersionUID = 1L;
+	private static final double serialVersionUID = 1L;
 	
 	private String nombreJuego;
 	private String tipoJuego;
@@ -42,7 +42,7 @@ public class JuegosDTO implements Serializable{
 
 	@Override
 	public String toString() {
-		return "Nombre del juego: "+getNombreJuego()+"\nTipo de juego: "+getTipoJuego()+"\nPresupuesto para el juego: "+getPresupuestoJuego();
+		return "\nNombre del juego: "+getNombreJuego()+"\nTipo de juego: "+getTipoJuego()+"\nPresupuesto para el juego: "+getPresupuestoJuego();
 	}
 	
 	

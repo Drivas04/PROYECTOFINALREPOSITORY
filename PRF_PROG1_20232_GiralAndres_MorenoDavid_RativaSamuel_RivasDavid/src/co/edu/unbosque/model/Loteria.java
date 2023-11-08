@@ -13,7 +13,7 @@ public class Loteria extends JuegosDTO implements Serializable{
 	private int numSeries;
 	
 	public Loteria(String nombreJuego, String tipoJuego, double presupuestoJuego, String[] nombre, int numNumeros, int numSeries) {
-		super(nombreJuego, tipoJuego, presupuestoJuego);
+		super(nombreJuego = "Loteria", tipoJuego = "Loteria", presupuestoJuego = 150000000000.00);
 		this.nombre = nombre;
 		this.numNumeros = numNumeros;
 		this.numSeries = numSeries;

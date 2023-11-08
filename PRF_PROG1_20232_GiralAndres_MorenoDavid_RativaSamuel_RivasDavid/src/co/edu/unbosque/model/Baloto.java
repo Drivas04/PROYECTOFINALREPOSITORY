@@ -8,7 +8,7 @@ public class Baloto extends JuegosDTO implements Serializable{
 	private int numCifras = 6;
 	
 	public Baloto(String nombreJuego, String tipoJuego, double presupuestoJuego, int numCifras) {
-		super(nombreJuego, tipoJuego, presupuestoJuego);
+		super(nombreJuego = "Baloto", tipoJuego = "Loteria", presupuestoJuego = 480000000);
 		this.numCifras =numCifras;
 	}
 	

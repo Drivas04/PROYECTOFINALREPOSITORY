@@ -15,6 +15,7 @@ public class PropiedadesCasasDeApuestas {
 		prop.setProperty("Nombre de la casa de apuestas", "PikaBet");
 		prop.setProperty("Numero de sedes", "4");
 		prop.setProperty("Presupuesto total", "$400'000.000");
+		prop.setProperty("Presupesto para Baloto", "");
 		try {
 			prop.store(new FileOutputStream(config), null);
 		} catch (FileNotFoundException e) {

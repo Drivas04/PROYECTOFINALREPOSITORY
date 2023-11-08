@@ -3,6 +3,7 @@ package co.edu.unbosque.view;
 import java.awt.CardLayout;
 
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 
 import co.edu.unbosque.controller.Controller;
 
@@ -33,6 +34,10 @@ public class VentanaPrincipal extends JFrame{
 		panelEleccion.getBtnChance().addActionListener(controller);
 		panelEleccion.getBtnLoteria().addActionListener(controller);
 		panelEleccion.getBtnSuperAstro().addActionListener(controller);
+	}
+	
+	public void mostrarMensaje(String mensaje, String titulo) {
+		JOptionPane.showMessageDialog(null, mensaje, titulo, 1);
 	}
 
 	public PanelPrincipal getPanelP() {
