@@ -9,9 +9,12 @@ import co.edu.unbosque.model.Baloto;
 import co.edu.unbosque.model.Chance;
 import co.edu.unbosque.model.JuegosDTO;
 import co.edu.unbosque.model.Loteria;
+import co.edu.unbosque.model.SedesDTO;
 import co.edu.unbosque.model.SuperAstro;
 import co.edu.unbosque.model.persistence.Archivo;
+import co.edu.unbosque.model.persistence.ArchivoSedes;
 import co.edu.unbosque.model.persistence.JuegosDAO;
+import co.edu.unbosque.model.persistence.SedesDAO;
 import co.edu.unbosque.view.VentanaPrincipal;
 
 public class Controller implements ActionListener{
@@ -23,6 +26,12 @@ public class Controller implements ActionListener{
 	private JuegosDAO juegosDao;
 	private File file = new File("Data/juegos.dat");
 	
+	private File filesedes=new File("Data/sedes.dat");
+	private ArrayList<SedesDTO> sedes;
+	private SedesDTO sedesdto;
+	private ArchivoSedes archivosedes;
+	private SedesDAO sedesDAO;
+	
 	public Controller() {
 		ventanaP = new VentanaPrincipal(this);
 		ventanaP.setVisible(true);
@@ -31,6 +40,14 @@ public class Controller implements ActionListener{
 		archivo = new Archivo(file);
 		juegosDao = new JuegosDAO(archivo);
 		juegos = archivo.leerArchivo(file);
+		
+		
+		
+		sedes=new ArrayList<SedesDTO>();
+		sedesdto = new SedesDTO(null, 0);
+		archivosedes=new ArchivoSedes(filesedes);
+		sedesDAO=new SedesDAO(archivosedes);
+		sedes = archivosedes.leerArchivoSedes(filesedes);
 	}
 
 	@Override
@@ -41,7 +58,14 @@ public class Controller implements ActionListener{
 			ventanaP.getPanelEleccion().setVisible(true);
 			ventanaP.resize(500,200);
 			ventanaP.setLocationRelativeTo(null);
-			ventanaP.mostrarMensaje(juegosDao.verJuegos(juegos), null);
+			//ventanaP.mostrarMensaje(juegosDao.verJuegos(juegos), null);
+		}
+		
+		if(e.getActionCommand().equals(ventanaP.getPanelP().SEDES)) {
+			ventanaP.getPanelP().setVisible(false);
+			ventanaP.getPanelS().setVisible(true);
+			//ventanaP.resize(500,200);
+			ventanaP.setLocationRelativeTo(null);
 		}
 		
 		//panelEleccion
@@ -71,5 +95,42 @@ public class Controller implements ActionListener{
 			SuperAstro superastro = new SuperAstro(null, null, 0, 0, null);
 			juegosDao.agregarJuego(superastro.getNombreJuego(), superastro.getTipoJuego(), superastro.getPresupuestoJuego(), juegos, file);
 		}
+		
+		//PanelS
+		if(e.getActionCommand().equals(ventanaP.getPanelP().SEDES)) {
+			try {
+				archivosedes.crearArchivoSedes(filesedes);
+				System.out.println("Exito");
+			}catch(Exception u) {
+				
+			}
+		}
+		
+		if(e.getActionCommand().equals(ventanaP.getPanelS().GUARDAR)) {
+			if(ventanaP.getPanelS().getTxtUbicacion().getText().isEmpty()
+				||ventanaP.getPanelS().getTxtNumEmpleados().getText().isEmpty())
+			{System.out.println("Agregar todos los campos");
+				
+			}else {
+				if(sedesDAO.guardarSede(ventanaP.getPanelS().getTxtUbicacion().getText(),
+					Integer.parseInt(ventanaP.getPanelS().getTxtNumEmpleados().getText()), sedes, filesedes)) {
+					System.out.println("Exito");
+				}else {
+					System.out.println("Fallo");
+				}
+				
+			}
+		}
+		if(e.getActionCommand().equals(ventanaP.getPanelS().VER)) {
+			if(getSedes().size()>0) {
+				System.out.println(sedesDAO.verSedes(sedes));
+			}else {
+				System.out.println("No hay Sedes");
+			}
+		}
+	}
+	
+	public ArrayList<SedesDTO>getSedes(){
+		return sedes;
 	}
 }

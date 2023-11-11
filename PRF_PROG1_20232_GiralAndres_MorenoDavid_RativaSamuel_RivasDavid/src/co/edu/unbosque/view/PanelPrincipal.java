@@ -15,8 +15,10 @@ public class PanelPrincipal extends JPanel{
 	private JLabel titulo;
 	private JLabel imagenFondo;
 	private JButton btnIngresar;
+	private JButton btnSedes;
 	
 	public static final String INGRESAR = "ingresar";
+	public static final String SEDES = "sedes";
 
 	public PanelPrincipal() {
 		setLayout(null);
@@ -24,13 +26,9 @@ public class PanelPrincipal extends JPanel{
 		imagenFondo.setBounds(0, 0, 800, 600);
 		ImageIcon fondo = new ImageIcon("Recursos/fondo.jpg");
 		imagenFondo.setIcon(new ImageIcon(fondo.getImage().getScaledInstance(800, 600, Image.SCALE_SMOOTH)));
-		add(imagenFondo);
+		//add(imagenFondo);
 		
-		titulo = new JLabel("Bienvenido a PikaB");
-		titulo.setLocation(275, 100);
-		titulo.setForeground(Color.black);
 		
-		add(titulo);
 		
 		btnIngresar = new JButton("Ingresar");
 		btnIngresar.setSize(240, 50);
@@ -39,7 +37,20 @@ public class PanelPrincipal extends JPanel{
 		btnIngresar.setFont(FontBoton);
 		btnIngresar.setActionCommand(INGRESAR);
 		add(btnIngresar);
-
+		
+		btnSedes = new JButton("Sedes");
+		btnSedes.setSize(100, 30);
+		btnSedes.setLocation(640, 20);
+		btnSedes.setFont(FontBoton);
+		btnSedes.setActionCommand(SEDES);
+		add(btnSedes);
+		
+		titulo = new JLabel("Bienvenido a PikaB");
+		//titulo.setLocation(275, 100);
+		titulo.setForeground(Color.black);
+		
+		add(titulo);
+		
 	}
 
 	public JLabel getTitulo() {
@@ -65,6 +76,15 @@ public class PanelPrincipal extends JPanel{
 	public void setBtnIngresar(JButton btnIngresar) {
 		this.btnIngresar = btnIngresar;
 	}
+
+	public JButton getBtnSedes() {
+		return btnSedes;
+	}
+
+	public void setBtnSedes(JButton btnSedes) {
+		this.btnSedes = btnSedes;
+	}
+	
 	
 	
 }

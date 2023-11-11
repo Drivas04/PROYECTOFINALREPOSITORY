@@ -14,6 +14,7 @@ public class VentanaPrincipal extends JFrame{
 	private PanelPrincipal panelP;
 	private PanelEleccionJuego panelEleccion;
 	private VentanaUsuario ventanaU;
+	private PanelSedes panelS;
 	
 	public VentanaPrincipal(Controller controller) {
 		setLayout(new CardLayout());
@@ -26,6 +27,7 @@ public class VentanaPrincipal extends JFrame{
 		panelP = new PanelPrincipal();
 		add(panelP);
 		panelP.getBtnIngresar().addActionListener(controller);
+		panelP.getBtnSedes().addActionListener(controller);
 		
 		panelEleccion = new PanelEleccionJuego();
 		add(panelEleccion);
@@ -34,6 +36,12 @@ public class VentanaPrincipal extends JFrame{
 		panelEleccion.getBtnChance().addActionListener(controller);
 		panelEleccion.getBtnLoteria().addActionListener(controller);
 		panelEleccion.getBtnSuperAstro().addActionListener(controller);
+		
+		panelS=new PanelSedes();
+		panelS.getButCrearArchivo().addActionListener(controller);
+		panelS.getButGuardar().addActionListener(controller);
+		panelS.getButverSedes().addActionListener(controller);
+		add(panelS);
 	}
 	
 	public void mostrarMensaje(String mensaje, String titulo) {
@@ -62,6 +70,14 @@ public class VentanaPrincipal extends JFrame{
 
 	public void setPanelEleccion(PanelEleccionJuego panelEleccion) {
 		this.panelEleccion = panelEleccion;
+	}
+
+	public PanelSedes getPanelS() {
+		return panelS;
+	}
+
+	public void setPanelS(PanelSedes panelS) {
+		this.panelS = panelS;
 	}
 	
 	
