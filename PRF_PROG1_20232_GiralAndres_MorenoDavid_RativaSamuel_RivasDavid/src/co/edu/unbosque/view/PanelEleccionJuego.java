@@ -1,23 +1,32 @@
 package co.edu.unbosque.view;
 
 import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.Graphics;
 import java.awt.GridLayout;
 
 import javax.swing.*;
+import javax.swing.border.TitledBorder;
 
 public class PanelEleccionJuego extends JPanel{
 
 	private static final long serialVersionUID = 1L;
 
 	private JButton btnBaloto, btnBetPlay, btnChance, btnLoteria, btnSuperAstro;
+	private ImageIcon fondo;
 	public static final String BALOTO = "baloto";
 	public static final String BETPLAY = "betplay";
 	public static final String CHANCE = "chance";
 	public static final String LOTERIA = "loteria";
 	public static final String SUPERASTRO = "superastro";
 	
-	public PanelEleccionJuego() { 
-		setLayout(new GridLayout(2, 3, 30, 30));
+	public PanelEleccionJuego(String ruta) { 
+		fondo = new ImageIcon(ruta);
+		setLayout(new GridLayout(2, 3, 50, 30));
+		
+		TitledBorder border = BorderFactory.createTitledBorder("Elija un juego");
+		border.setTitleColor(Color.BLACK);
+		setBorder(border);
 		
 		btnBaloto = new JButton("Baloto");
 		btnBaloto.setActionCommand(BALOTO);
@@ -40,6 +49,15 @@ public class PanelEleccionJuego extends JPanel{
 		add(btnSuperAstro);
 	}
 
+	
+	@Override
+	public void paint(Graphics g) {
+		Dimension dim = this.getSize();
+		g.drawImage(fondo.getImage(), 0, 0, dim.width, dim.height, null);
+		this.setOpaque(false);
+		super.paint(g);
+	}
+	
 	public JButton getBtnBaloto() {
 		return btnBaloto;
 	}

@@ -21,15 +21,15 @@ public class VentanaPrincipal extends JFrame{
 		setSize(800, 600);
 		setTitle("Casa de Apuestas PikaBet");
 		setLocationRelativeTo(null);
-		setResizable(false);
+		setResizable(true);
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		
-		panelP = new PanelPrincipal();
+		panelP = new PanelPrincipal("Recursos/fondo.jpg");
 		add(panelP);
 		panelP.getBtnIngresar().addActionListener(controller);
 		panelP.getBtnSedes().addActionListener(controller);
 		
-		panelEleccion = new PanelEleccionJuego();
+		panelEleccion = new PanelEleccionJuego("Recursos/fondo.jpg");
 		add(panelEleccion);
 		panelEleccion.getBtnBaloto().addActionListener(controller);
 		panelEleccion.getBtnBetPlay().addActionListener(controller);
@@ -37,7 +37,7 @@ public class VentanaPrincipal extends JFrame{
 		panelEleccion.getBtnLoteria().addActionListener(controller);
 		panelEleccion.getBtnSuperAstro().addActionListener(controller);
 		
-		panelS=new PanelSedes();
+		panelS = new PanelSedes("Recursos/fondo.jpg");
 		panelS.getButCrearArchivo().addActionListener(controller);
 		panelS.getButGuardar().addActionListener(controller);
 		panelS.getButverSedes().addActionListener(controller);

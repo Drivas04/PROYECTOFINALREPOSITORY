@@ -1,9 +1,16 @@
 package co.edu.unbosque.view;
 
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.Graphics;
+
+import javax.swing.BorderFactory;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
+import javax.swing.border.TitledBorder;
 
 public class PanelSedes extends JPanel {
 
@@ -17,12 +24,18 @@ public class PanelSedes extends JPanel {
 	private JButton butGuardar;
 	private JButton butverSedes;
 	
+	private ImageIcon fondo;
+	
 	public static final String CREAR="Crear";
 	public static final String GUARDAR="Guardar";
 	public static final String VER="Ver";
 	
-	public PanelSedes() {
+	public PanelSedes(String ruta) {
+		fondo = new ImageIcon(ruta);
 		setLayout(null);
+		TitledBorder border = BorderFactory.createTitledBorder("Ingrese los datos de la sede");
+		border.setTitleColor(Color.BLACK);
+		setBorder(border );
 		Ubicacion=new JLabel("Ubicacion de sede");
 		Ubicacion.setBounds(80, 80, 160, 80);
 		TxtUbicacion=new JTextField("");
@@ -56,6 +69,13 @@ public class PanelSedes extends JPanel {
 		
 	}
 
+	@Override
+	public void paint(Graphics g) {
+		Dimension dim = this.getSize();
+		g.drawImage(fondo.getImage(), 0, 0, dim.width, dim.height, null);
+		this.setOpaque(false);
+		super.paint(g);
+	}
 
 	public JButton getButverSedes() {
 		return butverSedes;

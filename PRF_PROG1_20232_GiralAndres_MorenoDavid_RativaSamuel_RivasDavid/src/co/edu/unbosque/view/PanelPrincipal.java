@@ -2,8 +2,10 @@ package co.edu.unbosque.view;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.Font;
-
+import java.awt.Graphics;
+import java.awt.GridLayout;
 import java.awt.Image;
 
 import javax.swing.*;
@@ -13,30 +15,25 @@ public class PanelPrincipal extends JPanel{
 	private static final long serialVersionUID = 1L;
 	
 	private JLabel titulo;
-	private JLabel imagenFondo;
+	private JLabel empty;
+	private ImageIcon fondo;
 	private JButton btnIngresar;
 	private JButton btnSedes;
 	
 	public static final String INGRESAR = "ingresar";
 	public static final String SEDES = "sedes";
 
-	public PanelPrincipal() {
-		setLayout(null);
-		imagenFondo = new JLabel();
-		imagenFondo.setBounds(0, 0, 800, 600);
-		ImageIcon fondo = new ImageIcon("Recursos/fondo.jpg");
-		imagenFondo.setIcon(new ImageIcon(fondo.getImage().getScaledInstance(800, 600, Image.SCALE_SMOOTH)));
-		//add(imagenFondo);
+	public PanelPrincipal(String ruta) {
+		fondo = new ImageIcon(ruta);
 		
+		setLayout(new GridLayout(3,3,90,180));
 		
-		
-		btnIngresar = new JButton("Ingresar");
-		btnIngresar.setSize(240, 50);
-		btnIngresar.setLocation(275, 450);
 		Font FontBoton = new Font("Agency FB", Font.BOLD, 20);
-		btnIngresar.setFont(FontBoton);
-		btnIngresar.setActionCommand(INGRESAR);
-		add(btnIngresar);
+		
+		empty = new JLabel();
+		add(empty);
+		empty = new JLabel();
+		add(empty);
 		
 		btnSedes = new JButton("Sedes");
 		btnSedes.setSize(100, 30);
@@ -45,13 +42,43 @@ public class PanelPrincipal extends JPanel{
 		btnSedes.setActionCommand(SEDES);
 		add(btnSedes);
 		
-		titulo = new JLabel("Bienvenido a PikaB");
-		//titulo.setLocation(275, 100);
-		titulo.setForeground(Color.black);
+		empty = new JLabel();
+		add(empty);
 		
+		titulo = new JLabel("Bienvenido a PikaBet");
+		Font font = new Font("Agency FB", Font.BOLD, 20);
+		titulo.setFont(font);
+		titulo.setForeground(Color.black);
 		add(titulo);
 		
+		empty = new JLabel();
+		add(empty);
+		
+		empty = new JLabel();
+		add(empty);
+		
+		btnIngresar = new JButton("Ingresar");
+		btnIngresar.setSize(240, 50);
+		btnIngresar.setLocation(275, 450);
+		btnIngresar.setFont(FontBoton);
+		btnIngresar.setActionCommand(INGRESAR);
+		add(btnIngresar);
+		
+		
+		
 	}
+	
+	
+
+	@Override
+	public void paint(Graphics g) {
+		Dimension dim = this.getSize();
+		g.drawImage(fondo.getImage(), 0, 0, dim.width, dim.height, null);
+		this.setOpaque(false);
+		super.paint(g);
+	}
+
+
 
 	public JLabel getTitulo() {
 		return titulo;
@@ -61,13 +88,6 @@ public class PanelPrincipal extends JPanel{
 		this.titulo = titulo;
 	}
 
-	public JLabel getImagenFondo() {
-		return imagenFondo;
-	}
-
-	public void setImagenFondo(JLabel imagenFondo) {
-		this.imagenFondo = imagenFondo;
-	}
 
 	public JButton getBtnIngresar() {
 		return btnIngresar;

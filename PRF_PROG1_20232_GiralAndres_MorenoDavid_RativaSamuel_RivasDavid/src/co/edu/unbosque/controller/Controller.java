@@ -100,7 +100,7 @@ public class Controller implements ActionListener{
 		if(e.getActionCommand().equals(ventanaP.getPanelP().SEDES)) {
 			try {
 				archivosedes.crearArchivoSedes(filesedes);
-				System.out.println("Exito");
+				//System.out.println("Exito");
 			}catch(Exception u) {
 				
 			}
@@ -108,24 +108,24 @@ public class Controller implements ActionListener{
 		
 		if(e.getActionCommand().equals(ventanaP.getPanelS().GUARDAR)) {
 			if(ventanaP.getPanelS().getTxtUbicacion().getText().isEmpty()
-				||ventanaP.getPanelS().getTxtNumEmpleados().getText().isEmpty())
-			{System.out.println("Agregar todos los campos");
+				||ventanaP.getPanelS().getTxtNumEmpleados().getText().isEmpty()){
+				ventanaP.mostrarMensaje("Agregar todos los campos", "ERROR");
 				
 			}else {
 				if(sedesDAO.guardarSede(ventanaP.getPanelS().getTxtUbicacion().getText(),
 					Integer.parseInt(ventanaP.getPanelS().getTxtNumEmpleados().getText()), sedes, filesedes)) {
-					System.out.println("Exito");
+					ventanaP.mostrarMensaje("Sede guardada exitosamente", "INFORMACION");
 				}else {
-					System.out.println("Fallo");
+					ventanaP.mostrarMensaje("Error al guardar sede", "ERROR");
 				}
 				
 			}
 		}
 		if(e.getActionCommand().equals(ventanaP.getPanelS().VER)) {
 			if(getSedes().size()>0) {
-				System.out.println(sedesDAO.verSedes(sedes));
+				ventanaP.mostrarMensaje(sedesDAO.verSedes(sedes), "INFORMACION");
 			}else {
-				System.out.println("No hay Sedes");
+				ventanaP.mostrarMensaje("No hay sedes para mostrar", "ERROR");
 			}
 		}
 	}
