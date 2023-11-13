@@ -100,9 +100,9 @@ public class Controller implements ActionListener{
 		if(e.getActionCommand().equals(ventanaP.getPanelP().SEDES)) {
 			try {
 				archivosedes.crearArchivoSedes(filesedes);
-				//System.out.println("Exito");
-			}catch(Exception u) {
 				
+			}catch(Exception ex) {
+				ex.printStackTrace();
 			}
 		}
 		

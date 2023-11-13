@@ -3,10 +3,14 @@ package co.edu.unbosque.view;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.Graphics;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
 import java.awt.GridLayout;
 import java.awt.Image;
+import java.awt.Insets;
 
 import javax.swing.*;
 
@@ -26,8 +30,9 @@ public class PanelPrincipal extends JPanel{
 	public PanelPrincipal(String ruta) {
 		fondo = new ImageIcon(ruta);
 		
-		setLayout(new GridLayout(3,3,90,180));
+		setLayout(new GridBagLayout());
 		
+		Dimension dim1 = this.getSize();
 		Font FontBoton = new Font("Agency FB", Font.BOLD, 20);
 		
 		empty = new JLabel();
@@ -40,16 +45,24 @@ public class PanelPrincipal extends JPanel{
 		btnSedes.setLocation(640, 20);
 		btnSedes.setFont(FontBoton);
 		btnSedes.setActionCommand(SEDES);
-		add(btnSedes);
+		add(btnSedes, new GridBagConstraints (0, 0, 1, 1, 0, 0,
+                GridBagConstraints.NORTH,
+                GridBagConstraints.EAST,
+                new Insets (0,0,0,0), 0, 0));
 		
 		empty = new JLabel();
 		add(empty);
 		
-		titulo = new JLabel("Bienvenido a PikaBet");
-		Font font = new Font("Agency FB", Font.BOLD, 20);
-		titulo.setFont(font);
-		titulo.setForeground(Color.black);
-		add(titulo);
+		titulo = new JLabel();
+		ImageIcon titulo1 = new ImageIcon("Recursos/Logo.png");
+		//titulo.setSize();
+		//titulo.setLocation(320, 100);
+		titulo.setIcon(new ImageIcon(titulo1.getImage().getScaledInstance(300, 200, Image.SCALE_DEFAULT)));
+		add(titulo, 
+			       new GridBagConstraints (0, 0, 1, 1, 0, 0,
+                           GridBagConstraints.CENTER,
+                           GridBagConstraints.CENTER,
+                           new Insets (0,0,0,0), 0, 0));
 		
 		empty = new JLabel();
 		add(empty);
@@ -59,16 +72,31 @@ public class PanelPrincipal extends JPanel{
 		
 		btnIngresar = new JButton("Ingresar");
 		btnIngresar.setSize(240, 50);
-		btnIngresar.setLocation(275, 450);
+		//btnIngresar.setLocation(800/2, 450);
 		btnIngresar.setFont(FontBoton);
 		btnIngresar.setActionCommand(INGRESAR);
-		add(btnIngresar);
+		add(btnIngresar, new GridBagConstraints (0, 0, 1, 1, 1, 1,
+                GridBagConstraints.SOUTH,
+                GridBagConstraints.SOUTH,
+                new Insets (0,0,0,0), 0, 0));
 		
 		
-		
+		//agregarConstrains();
 	}
 	
-	
+	public void agregarConstrains() {
+		GridBagConstraints gbc = new GridBagConstraints();
+		
+		gbc.gridx=1;
+		gbc.gridy=1;
+		gbc.gridwidth=3;
+		gbc.gridheight=1;
+		gbc.weightx=1.0;
+		gbc.weighty=1.0;
+		gbc.fill=GridBagConstraints.BOTH;
+		
+		add(titulo, gbc);
+	}
 
 	@Override
 	public void paint(Graphics g) {
