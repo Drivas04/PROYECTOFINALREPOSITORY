@@ -23,22 +23,30 @@ public class PanelPrincipal extends JPanel{
 	private ImageIcon fondo;
 	private JButton btnIngresar;
 	private JButton btnSedes;
+	private JButton btnParametros;
 	
 	public static final String INGRESAR = "ingresar";
 	public static final String SEDES = "sedes";
+	public static final String PARAMETROS = "parametros";
 
 	public PanelPrincipal(String ruta) {
 		fondo = new ImageIcon(ruta);
 		
 		setLayout(new GridBagLayout());
 		
-		Dimension dim1 = this.getSize();
 		Font FontBoton = new Font("Agency FB", Font.BOLD, 20);
 		
 		empty = new JLabel();
 		add(empty);
 		empty = new JLabel();
 		add(empty);
+		
+		btnParametros = new JButton("Parametros");
+		btnParametros.setActionCommand(PARAMETROS);
+		add(btnParametros, new GridBagConstraints (0, 0, 1, 1, 0, 0,
+                GridBagConstraints.NORTHWEST,
+                GridBagConstraints.EAST,
+                new Insets (0,0,0,0), 0, 0));
 		
 		btnSedes = new JButton("Sedes");
 		btnSedes.setSize(100, 30);
@@ -131,6 +139,14 @@ public class PanelPrincipal extends JPanel{
 
 	public void setBtnSedes(JButton btnSedes) {
 		this.btnSedes = btnSedes;
+	}
+
+	public JButton getBtnParametros() {
+		return btnParametros;
+	}
+
+	public void setBtnParametros(JButton btnParametros) {
+		this.btnParametros = btnParametros;
 	}
 	
 	
