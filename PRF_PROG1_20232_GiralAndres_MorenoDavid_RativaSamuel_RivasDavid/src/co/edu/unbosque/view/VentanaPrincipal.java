@@ -14,8 +14,10 @@ public class VentanaPrincipal extends JFrame{
 	private PanelPrincipal panelP;
 	private PanelParametros panelPa;
 	private PanelEleccionJuego panelEleccion;
-	private VentanaUsuario ventanaU;
 	private PanelSedes panelS;
+	private PanelOpciones PanelO;
+	private PanelRegistroUsuario PanelR;
+	private PanelActualizar PanelA;
 	
 	public VentanaPrincipal(Controller controller) {
 		setLayout(new CardLayout());
@@ -30,6 +32,7 @@ public class VentanaPrincipal extends JFrame{
 		panelP.getBtnIngresar().addActionListener(controller);
 		panelP.getBtnParametros().addActionListener(controller);
 		panelP.getBtnSedes().addActionListener(controller);
+		panelP.getBtnApostadores().addActionListener(controller);
 		
 		panelPa = new PanelParametros("Recursos/fondo.jpg");
 		add(panelPa);
@@ -52,12 +55,32 @@ public class VentanaPrincipal extends JFrame{
 		panelS.getButGuardar().addActionListener(controller);
 		panelS.getButverSedes().addActionListener(controller);
 		add(panelS);
+		
+		PanelO=new PanelOpciones("Recursos/fondo.jpg");
+		add(PanelO);
+		PanelO.getCrear().addActionListener(controller);
+		PanelO.getLeer().addActionListener(controller);
+		PanelO.getBorrar().addActionListener(controller);
+		PanelO.getActualizar().addActionListener(controller);
+		
+		PanelR=new PanelRegistroUsuario("Recursos/fondo.jpg");
+		add(PanelR);
+		PanelR.getBotonCrear().addActionListener(controller);
+		PanelR.getVolver().addActionListener(controller);
+		
+		PanelA=new PanelActualizar();
+		add(PanelA);
+		PanelA.getActualizarA().addActionListener(controller);
 	}
 	
 	public void mostrarMensaje(String mensaje, String titulo) {
 		JOptionPane.showMessageDialog(null, mensaje, titulo, 1);
 	}
 
+	public String capturarDato(String mensaje, String titulo) {
+		return JOptionPane.showInputDialog(null,mensaje,titulo,JOptionPane.QUESTION_MESSAGE);
+	}
+	
 	public PanelPrincipal getPanelP() {
 		return panelP;
 	}
@@ -66,13 +89,6 @@ public class VentanaPrincipal extends JFrame{
 		this.panelP = panelP;
 	}
 
-	public VentanaUsuario getVentanaU() {
-		return ventanaU;
-	}
-
-	public void setVentanaU(VentanaUsuario ventanaU) {
-		this.ventanaU = ventanaU;
-	}
 
 	public PanelEleccionJuego getPanelEleccion() {
 		return panelEleccion;
@@ -96,6 +112,30 @@ public class VentanaPrincipal extends JFrame{
 
 	public void setPanelPa(PanelParametros panelPa) {
 		this.panelPa = panelPa;
+	}
+
+	public PanelOpciones getPanelO() {
+		return PanelO;
+	}
+
+	public void setPanelO(PanelOpciones panelO) {
+		PanelO = panelO;
+	}
+
+	public PanelRegistroUsuario getPanelR() {
+		return PanelR;
+	}
+
+	public void setPanelR(PanelRegistroUsuario panelR) {
+		PanelR = panelR;
+	}
+
+	public PanelActualizar getPanelA() {
+		return PanelA;
+	}
+
+	public void setPanelA(PanelActualizar panelA) {
+		PanelA = panelA;
 	}
 	
 	

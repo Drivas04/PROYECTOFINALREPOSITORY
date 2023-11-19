@@ -5,6 +5,7 @@ import java.awt.event.ActionListener;
 import java.io.File;
 import java.util.ArrayList;
 
+import co.edu.unbosque.model.ApostadoresDTO;
 import co.edu.unbosque.model.Baloto;
 import co.edu.unbosque.model.Chance;
 import co.edu.unbosque.model.JuegosDTO;
@@ -12,7 +13,9 @@ import co.edu.unbosque.model.Loteria;
 import co.edu.unbosque.model.ParametrosDTO;
 import co.edu.unbosque.model.SedesDTO;
 import co.edu.unbosque.model.SuperAstro;
+import co.edu.unbosque.model.persistence.ApostadoresDAO;
 import co.edu.unbosque.model.persistence.Archivo;
+import co.edu.unbosque.model.persistence.ArchivoApostadores;
 import co.edu.unbosque.model.persistence.ArchivoPropiedades;
 import co.edu.unbosque.model.persistence.ArchivoSedes;
 import co.edu.unbosque.model.persistence.JuegosDAO;
@@ -40,6 +43,11 @@ public class Controller implements ActionListener{
 	private ArchivoSedes archivosedes;
 	private SedesDAO sedesDAO;
 	
+	private ArrayList<ApostadoresDTO>apostadores;
+	private ArchivoApostadores archivoAp;
+	private ApostadoresDAO apostadoresdao;
+	private File fileAp=new File("Data/apostadores.dat");
+	
 	public Controller() {
 		ventanaP = new VentanaPrincipal(this);
 		ventanaP.setVisible(true);
@@ -58,6 +66,11 @@ public class Controller implements ActionListener{
 		archivosedes=new ArchivoSedes(filesedes);
 		sedesDAO=new SedesDAO(archivosedes);
 		sedes = archivosedes.leerArchivoSedes(filesedes);
+		
+		apostadores=new ArrayList<ApostadoresDTO>();
+		archivoAp=new ArchivoApostadores(fileAp);
+		apostadoresdao=new ApostadoresDAO(archivoAp);
+		apostadores=archivoAp.LeerArchivo(fileAp);
 	}
 
 	@Override
@@ -81,6 +94,13 @@ public class Controller implements ActionListener{
 		if(e.getActionCommand().equals(ventanaP.getPanelP().SEDES)) {
 			ventanaP.getPanelP().setVisible(false);
 			ventanaP.getPanelS().setVisible(true);
+			//ventanaP.resize(500,200);
+			ventanaP.setLocationRelativeTo(null);
+		}
+		
+		if(e.getActionCommand().equals(ventanaP.getPanelP().APOSTADORES)) {
+			ventanaP.getPanelP().setVisible(false);
+			ventanaP.getPanelO().setVisible(true);
 			//ventanaP.resize(500,200);
 			ventanaP.setLocationRelativeTo(null);
 		}
@@ -117,6 +137,89 @@ public class Controller implements ActionListener{
 			ventanaP.setLocationRelativeTo(null);
 		}
 		
+		//panelApostadores
+		if(e.getActionCommand().equals(ventanaP.getPanelO().CREARA)) {
+			
+			ventanaP.getPanelO().setVisible(false);
+			ventanaP.getPanelR().setVisible(true);
+			ventanaP.resize(500,300);
+			ventanaP.setLocationRelativeTo(null);
+		}
+		
+		if(e.getActionCommand().equals(ventanaP.getPanelR().VOLVER)) {
+			
+			ventanaP.getPanelR().setVisible(false);
+			ventanaP.getPanelP().setVisible(false);
+			ventanaP.getPanelO().setVisible(true);
+		}
+		
+		
+		if(e.getActionCommand().equals(ventanaP.getPanelO().ACTUALIZAR)) {
+			String cedulaApostador=ventanaP.capturarDato("Ingrese la cedula del apostador que quiere actualizar", "INGRESE CEDULA");
+			if(apostadoresdao.BuscarApostador(cedulaApostador, apostadores)!=null) {
+			apostadoresdao.EliminarApostador(cedulaApostador, apostadores, fileAp);
+			ventanaP.getPanelO().setVisible(false);
+			ventanaP.getPanelR().setVisible(true);
+			ventanaP.resize(500,300);
+			ventanaP.mostrarMensaje("Al actualizar los datos pulse el boton CREAR para guardar", "INFO");
+			}
+			else {
+				ventanaP.mostrarMensaje("Apostador no encontrado", "ERROR");
+				
+			}
+		}
+		
+		if(e.getActionCommand().equals(ventanaP.getPanelR().CREAR)) { 
+			
+			if(ventanaP.getPanelR().getCampoNombre().getText().isEmpty()
+					|| ventanaP.getPanelR().getCampoCedula().getText().isEmpty()
+					|| ventanaP.getPanelR().getCampoDireccion().getText().isEmpty()
+					|| ventanaP.getPanelR().getCampoCelular().getText().isEmpty()
+					|| ventanaP.getPanelR().getCampoEdad().getText().isEmpty()) {
+				  ventanaP.mostrarMensaje("Debe agregar todos los valores", "error");
+			}else {
+				int numero=Integer.parseInt(ventanaP.getPanelR().getCampoEdad().getText());
+				if(numero<18) {
+					ventanaP.mostrarMensaje("El jugador debe ser mayor de edad", "ERROR");
+				}
+			else {
+				if(apostadoresdao.AgregarApostador(ventanaP.getPanelR().getCampoNombre().getText(), ventanaP.getPanelR().getCampoCedula().getText(),ventanaP.getPanelR().getCampoCelular().getText(),
+						ventanaP.getPanelR().getCampoDireccion().getText(),ventanaP.getPanelR().getCampoEdad().getText(), apostadores,fileAp)) {
+					ventanaP.mostrarMensaje("Se ha agregado el apostador con cedula: "+ventanaP.getPanelR().getCampoCedula().getText(), "INFORMACION");	
+				}else {
+					ventanaP.mostrarMensaje("El apostador con cedula: "+ventanaP.getPanelR().getCampoCedula().getText()+" ya se enecunetra en el sistema", "ERROR");
+				}
+						
+			}
+			
+		}
+			}
+			
+		
+		if(e.getActionCommand().equals(ventanaP.getPanelO().LEER)) {
+			if(getApostadores().size()>0) {
+				ventanaP.mostrarMensaje(apostadoresdao.LeerApostador(apostadores), "informacion");
+			}else {
+				ventanaP.mostrarMensaje("No hay apostadores en el sistema actualmente", "Informacion");
+			}
+			
+		}
+		
+		
+		
+		if(e.getActionCommand().equals(ventanaP.getPanelO().BORRAR)) {
+			 String cedulaApostador1=ventanaP.capturarDato("Ingrese la cedula del apostador que quiere eliminar", "INGRESE CEDULA");
+			if(apostadoresdao.BuscarApostador(cedulaApostador1, apostadores)!=null) {
+				if(apostadoresdao.EliminarApostador(cedulaApostador1, apostadores, fileAp)){
+				ventanaP.mostrarMensaje("Se ha eliminado el apostador con cedula: "+cedulaApostador1, "INFORMACION");
+				}else {
+					ventanaP.mostrarMensaje("No se ha podido eliminar el apostador con cedula: "+cedulaApostador1, "ERROR");
+				}
+			}else {
+				ventanaP.mostrarMensaje("El apostador con cedula: "+cedulaApostador1+" no se ha encontrado en el sistema", "ERROR");
+			}
+		}
+		 
 		//panelEleccion
 		if(e.getActionCommand().equals(ventanaP.getPanelEleccion().BALOTO)) {
 			Baloto baloto = new Baloto(null, null, 0, 0);
@@ -182,6 +285,8 @@ public class Controller implements ActionListener{
 	public ArrayList<SedesDTO>getSedes(){
 		return sedes;
 	}
-	
+	public ArrayList<ApostadoresDTO>getApostadores(){
+		return apostadores;
+	}
 	
 }

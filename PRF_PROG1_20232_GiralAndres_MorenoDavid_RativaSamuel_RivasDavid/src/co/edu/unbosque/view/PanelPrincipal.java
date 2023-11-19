@@ -24,10 +24,12 @@ public class PanelPrincipal extends JPanel{
 	private JButton btnIngresar;
 	private JButton btnSedes;
 	private JButton btnParametros;
+	private JButton btnApostadores;
 	
 	public static final String INGRESAR = "ingresar";
 	public static final String SEDES = "sedes";
 	public static final String PARAMETROS = "parametros";
+	public static final String APOSTADORES = "apostadores";
 
 	public PanelPrincipal(String ruta) {
 		fondo = new ImageIcon(ruta);
@@ -55,6 +57,16 @@ public class PanelPrincipal extends JPanel{
 		btnSedes.setActionCommand(SEDES);
 		add(btnSedes, new GridBagConstraints (0, 0, 1, 1, 0, 0,
                 GridBagConstraints.NORTH,
+                GridBagConstraints.EAST,
+                new Insets (0,0,0,0), 0, 0));
+		
+		btnApostadores = new JButton("Apostadores");
+		btnApostadores.setSize(100, 30);
+		btnApostadores.setLocation(640, 20);
+		btnApostadores.setFont(FontBoton);
+		btnApostadores.setActionCommand(APOSTADORES);
+		add(btnApostadores, new GridBagConstraints (0, 0, 1, 1, 0, 0,
+                GridBagConstraints.NORTHEAST,
                 GridBagConstraints.EAST,
                 new Insets (0,0,0,0), 0, 0));
 		
@@ -147,6 +159,14 @@ public class PanelPrincipal extends JPanel{
 
 	public void setBtnParametros(JButton btnParametros) {
 		this.btnParametros = btnParametros;
+	}
+
+	public JButton getBtnApostadores() {
+		return btnApostadores;
+	}
+
+	public void setBtnApostadores(JButton btnApostadores) {
+		this.btnApostadores = btnApostadores;
 	}
 	
 	
