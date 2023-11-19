@@ -1,35 +1,29 @@
 package co.edu.unbosque.model.persistence;
 
+
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.Serializable;
-import java.util.ArrayList;
+
 import java.util.Properties;
 
-import co.edu.unbosque.controller.Controller;
-import co.edu.unbosque.model.ParametrosDTO;
-import co.edu.unbosque.view.PanelParametros;
-import co.edu.unbosque.view.VentanaPrincipal;
+
+
 
 public class PropiedadesCasasDeApuestas implements Serializable{
 
 	private static final long serialVersionUID = 1;
 	
 	private Properties prop = new Properties();
-	private String config = "./Data/config.properties";
-	private String nombre;
-	private String numSedes;
-	private String presupuesto;
+	private String config = "Data/config.properties";
 	
-	public String escribirPropiedades() {
+	public String escribirPropiedades(String prop1, String prop2, String prop3) {
 		
-			prop.setProperty("Nombre de la casa de apuestas", getNombre());
-			prop.setProperty("Numero de sedes", getNumSedes());
-			prop.setProperty("Presupuesto total", getPresupuesto());
-		
-		
+		prop.setProperty("NombreDeLaCasaDeApuestas", prop1);
+		prop.setProperty("NumeroDeSedes", prop2);
+		prop.setProperty("PresupuestoTotal", prop3);
 		try {
 			prop.store(new FileOutputStream(config), null);
 		} catch (FileNotFoundException e) {
@@ -46,9 +40,9 @@ public class PropiedadesCasasDeApuestas implements Serializable{
 		String linea="";
 		try {
 			prop.load(new FileInputStream(config));
-			linea+= "Nombre de la casa de apuestas: "+prop.getProperty("Nombre de la casa de apuestas");
-			linea += "\nNumero de sedes: "+prop.getProperty("Numero de sedes");
-			linea += "\nPresupuesto total: "+prop.getProperty("Presupuesto total");
+			linea += "Nombre De La Casa De Apuestas: "+prop.getProperty("NombreDeLaCasaDeApuestas");
+			linea += "\nNumero de sedes: "+prop.getProperty("NumeroDeSedes");
+			linea += "\nPresupuesto total: "+prop.getProperty("PresupuestoTotal");
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -67,31 +61,6 @@ public class PropiedadesCasasDeApuestas implements Serializable{
 		this.prop = prop;
 	}
 
-	public String getNombre() {
-		return nombre;
-	}
 
-	public void setNombre(String nombre) {
-		this.nombre = nombre;
-	}
-
-	public String getNumSedes() {
-		return numSedes;
-	}
-
-	public void setNumSedes(String numSedes) {
-		this.numSedes = numSedes;
-	}
-
-	public String getPresupuesto() {
-		return presupuesto;
-	}
-
-	public void setPresupuesto(String presupuesto) {
-		this.presupuesto = presupuesto;
-	}
-
-
-	
 	
 }

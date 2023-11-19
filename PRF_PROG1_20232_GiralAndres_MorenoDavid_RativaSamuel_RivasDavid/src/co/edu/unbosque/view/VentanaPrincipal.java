@@ -49,11 +49,13 @@ public class VentanaPrincipal extends JFrame{
 		panelEleccion.getBtnChance().addActionListener(controller);
 		panelEleccion.getBtnLoteria().addActionListener(controller);
 		panelEleccion.getBtnSuperAstro().addActionListener(controller);
+		panelEleccion.getBtnVolver().addActionListener(controller);
 		
 		panelS = new PanelSedes("Recursos/fondo.jpg");
 		panelS.getButCrearArchivo().addActionListener(controller);
 		panelS.getButGuardar().addActionListener(controller);
 		panelS.getButverSedes().addActionListener(controller);
+		panelS.getButVolver().addActionListener(controller);
 		add(panelS);
 		
 		PanelO=new PanelOpciones("Recursos/fondo.jpg");
@@ -62,6 +64,7 @@ public class VentanaPrincipal extends JFrame{
 		PanelO.getLeer().addActionListener(controller);
 		PanelO.getBorrar().addActionListener(controller);
 		PanelO.getActualizar().addActionListener(controller);
+		PanelO.getVolver().addActionListener(controller);
 		
 		PanelR=new PanelRegistroUsuario("Recursos/fondo.jpg");
 		add(PanelR);

@@ -14,7 +14,7 @@ public class JuegosDAO {
 	}
 	
 	//CRUD
-	public boolean agregarJuego(String nombreJ, String tipoJ, double presupuestoJ, ArrayList<JuegosDTO> juegos, File file) {
+	public boolean agregarJuego(String nombreJ, String tipoJ, String presupuestoJ, ArrayList<JuegosDTO> juegos, File file) {
 		JuegosDTO nuevo = new JuegosDTO(nombreJ, tipoJ, presupuestoJ);
 		if(buscarJuego(nombreJ, juegos)==null) {
 			juegos.add(nuevo);
@@ -27,9 +27,10 @@ public class JuegosDAO {
 		}
 	}
 	
-	public String verJuegos(ArrayList<JuegosDTO> juegos) {
+	public String verJuego(String nombreJuego, ArrayList<JuegosDTO> juegos) {
 		String texto = "";
 		for(int i=0;i<juegos.size();i++) {
+			if(juegos.get(i).getNombreJuego().equals(nombreJuego))
 			texto = texto.concat(juegos.get(i).toString()+"\n");
 		}
 		return texto;

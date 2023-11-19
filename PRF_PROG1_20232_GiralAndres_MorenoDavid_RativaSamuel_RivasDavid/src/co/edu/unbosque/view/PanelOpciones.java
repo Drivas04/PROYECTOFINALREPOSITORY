@@ -8,13 +8,16 @@ import javax.swing.JPanel;
 
 public class PanelOpciones extends JPanel {
 	
-	private JButton Crear,Leer,Actualizar,Borrar;
+	private static final long serialVersionUID = 1L;
+	
+	private JButton Crear,Leer,Actualizar,Borrar, volver;
 	private ImageIcon fondo;
 	
 	public static final String CREARA = "crear";
 	public static final String LEER = "leer";
 	public static final String ACTUALIZAR = "actualizar";
 	public static final String BORRAR = "borrar";
+	public static final String VOLVER = "volver";
 	
 	public PanelOpciones(String ruta) {
 		fondo = new ImageIcon(ruta);
@@ -30,7 +33,10 @@ public class PanelOpciones extends JPanel {
 		add(Actualizar);
 		Borrar=new JButton("Borras datos de apostador");
 		Borrar.setActionCommand(BORRAR);
-		add(Borrar);	
+		add(Borrar);
+		volver = new JButton("Volver");
+		volver.setActionCommand(VOLVER);
+		add(volver);
 	}
 	
 	@Override
@@ -82,6 +88,14 @@ public class PanelOpciones extends JPanel {
 
 	public static String getBORRAR() {
 		return BORRAR;
+	}
+
+	public JButton getVolver() {
+		return volver;
+	}
+
+	public void setVolver(JButton volver) {
+		this.volver = volver;
 	}
 	
 	

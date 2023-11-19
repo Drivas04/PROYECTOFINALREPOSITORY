@@ -17,7 +17,7 @@ public class PanelParametros extends JPanel{
 	private JTextField txtnombreCasa, txtNumeroSedes, txtPresupuestosTotales;
 	private JButton btnCrear, btnModificar, btnGuardar, btnVolver;
 	
-	public static final String CREAR = "crear";
+	public static final String CREARAR = "crearAR";
 	public static final String GUARDAR = "guardar";
 	public static final String MODIFICAR = "modificar";
 	public static final String VOLVER = "volver";
@@ -58,7 +58,7 @@ public class PanelParametros extends JPanel{
 		add(empty);
 		
 		btnCrear = new JButton("Crear archivo");
-		btnCrear.setActionCommand(CREAR);
+		btnCrear.setActionCommand(CREARAR);
 		add(btnCrear);
 		
 		btnGuardar = new JButton("Guardar parametros");

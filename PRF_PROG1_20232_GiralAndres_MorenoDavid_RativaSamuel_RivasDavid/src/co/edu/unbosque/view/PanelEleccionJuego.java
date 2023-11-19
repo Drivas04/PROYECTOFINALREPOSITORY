@@ -12,13 +12,14 @@ public class PanelEleccionJuego extends JPanel{
 
 	private static final long serialVersionUID = 1L;
 
-	private JButton btnBaloto, btnBetPlay, btnChance, btnLoteria, btnSuperAstro;
+	private JButton btnBaloto, btnBetPlay, btnChance, btnLoteria, btnSuperAstro, btnVolver;
 	private ImageIcon fondo;
-	public static final String BALOTO = "baloto";
-	public static final String BETPLAY = "betplay";
-	public static final String CHANCE = "chance";
-	public static final String LOTERIA = "loteria";
-	public static final String SUPERASTRO = "superastro";
+	public static final String BALOTO = "Baloto";
+	public static final String BETPLAY = "BetPlay";
+	public static final String CHANCE = "Chance";
+	public static final String LOTERIA = "Loteria";
+	public static final String SUPERASTRO = "SuperAstro";
+	public static final String VOLVER = "volver";
 	
 	public PanelEleccionJuego(String ruta) { 
 		fondo = new ImageIcon(ruta);
@@ -47,6 +48,10 @@ public class PanelEleccionJuego extends JPanel{
 		btnSuperAstro = new JButton("Super Astro");
 		btnSuperAstro.setActionCommand(SUPERASTRO);
 		add(btnSuperAstro);
+		
+		btnVolver = new JButton("Volver");
+		btnVolver.setActionCommand(VOLVER);
+		add(btnVolver);
 	}
 
 	
@@ -96,6 +101,16 @@ public class PanelEleccionJuego extends JPanel{
 
 	public void setBtnSuperAstro(JButton btnSuperAstro) {
 		this.btnSuperAstro = btnSuperAstro;
+	}
+
+
+	public JButton getBtnVolver() {
+		return btnVolver;
+	}
+
+
+	public void setBtnVolver(JButton btnVolver) {
+		this.btnVolver = btnVolver;
 	}
 	
 	

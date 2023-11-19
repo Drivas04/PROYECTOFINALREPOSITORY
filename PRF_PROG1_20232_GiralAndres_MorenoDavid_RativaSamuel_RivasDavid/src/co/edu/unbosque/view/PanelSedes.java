@@ -3,6 +3,7 @@ package co.edu.unbosque.view;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
+import java.awt.GridLayout;
 
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
@@ -19,23 +20,28 @@ public class PanelSedes extends JPanel {
 	private JTextField TxtUbicacion;
 	private JLabel NumEmpleados;
 	private JTextField TxtNumEmpleados;
+	private JLabel empty;
 	//Botones
 	private JButton butCrearArchivo;
 	private JButton butGuardar;
 	private JButton butverSedes;
+	private JButton butVolver;
 	
 	private ImageIcon fondo;
 	
 	public static final String CREAR="Crear";
 	public static final String GUARDAR="Guardar";
 	public static final String VER="Ver";
+	public static final String VOLVER="Volver";
 	
 	public PanelSedes(String ruta) {
 		fondo = new ImageIcon(ruta);
-		setLayout(null);
+		setLayout(new GridLayout(3,3,20,20));
 		TitledBorder border = BorderFactory.createTitledBorder("Ingrese los datos de la sede");
 		border.setTitleColor(Color.BLACK);
 		setBorder(border );
+		empty = new JLabel();
+		
 		Ubicacion=new JLabel("Ubicacion de sede");
 		Ubicacion.setBounds(80, 80, 160, 80);
 		TxtUbicacion=new JTextField("");
@@ -51,17 +57,24 @@ public class PanelSedes extends JPanel {
 		butCrearArchivo.setActionCommand(CREAR);
 		
 		butGuardar=new JButton("Guardar");
-		butGuardar.setBounds(320,260,110, 35);
+		butGuardar.setBounds(320,260,145, 35);
 		butGuardar.setActionCommand(GUARDAR);
 		
 		butverSedes=new JButton("Ver sedes");
 		butverSedes.setBounds(460, 260, 145, 35);
-		butverSedes.setActionCommand(VER);;
+		butverSedes.setActionCommand(VER);
+		
+		butVolver = new JButton("Volver");
+		butVolver.setBounds(320, 460, 145, 35);
+		butVolver.setActionCommand(VOLVER);
 		
 		add(Ubicacion);
 		add(TxtUbicacion);
+		add(butVolver);
+		
 		add(NumEmpleados);
 		add(TxtNumEmpleados);
+		add(empty);
 		
 		add(butCrearArchivo);
 		add(butGuardar);
@@ -150,6 +163,14 @@ public class PanelSedes extends JPanel {
 	public static String getCrear() {
 		return CREAR;
 	}
-	
 
+	public JButton getButVolver() {
+		return butVolver;
+	}
+
+	public void setButVolver(JButton butVolver) {
+		this.butVolver = butVolver;
+	}
+	
+	
 }

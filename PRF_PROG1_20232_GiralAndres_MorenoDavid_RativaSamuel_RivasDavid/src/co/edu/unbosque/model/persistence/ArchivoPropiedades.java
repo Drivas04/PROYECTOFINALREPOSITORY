@@ -21,15 +21,15 @@ public class ArchivoPropiedades {
 		
 	}
 	
-	public void crearArchivo(File archProp) {
-		VentanaPrincipal v = new VentanaPrincipal(null);
+	public static void crearArchivo(File archProp) {
+		
 		if (archProp.exists()) {
-			v.mostrarMensaje("El archivo ya existe", "INFO");
+			
 		}
 		else {
 			try {
 				archProp.createNewFile();
-				v.mostrarMensaje("Archivo creado", "EXITO");
+				
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -73,9 +73,9 @@ public class ArchivoPropiedades {
 		return parametros;
 	}
 	
-	public String verPropiedades() {
+	public String verPropiedades(String prop1, String prop2, String prop3) {
 		PropiedadesCasasDeApuestas prop = new PropiedadesCasasDeApuestas();
-		prop.escribirPropiedades();
+		prop.escribirPropiedades(prop1, prop2, prop3);
 		return ""+prop.leerPropiedades();
 	}
 }

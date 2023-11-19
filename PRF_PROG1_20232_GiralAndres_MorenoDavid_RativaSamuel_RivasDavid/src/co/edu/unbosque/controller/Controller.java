@@ -7,6 +7,7 @@ import java.util.ArrayList;
 
 import co.edu.unbosque.model.ApostadoresDTO;
 import co.edu.unbosque.model.Baloto;
+import co.edu.unbosque.model.BetPlay;
 import co.edu.unbosque.model.Chance;
 import co.edu.unbosque.model.JuegosDTO;
 import co.edu.unbosque.model.Loteria;
@@ -33,7 +34,6 @@ public class Controller implements ActionListener{
 	private File file = new File("Data/juegos.dat");
 	
 	private ArrayList<ParametrosDTO> parametros;
-	private PropiedadesCasasDeApuestas props;
 	private ArchivoPropiedades archprop;
 	private ParametrosDAO parametrosdao;
 	private File fileParametros = new File("Data/config.dat");
@@ -57,7 +57,7 @@ public class Controller implements ActionListener{
 		juegos = archivo.leerArchivo(file);
 		
 		parametros = new ArrayList<ParametrosDTO>();
-		props = new PropiedadesCasasDeApuestas();
+		
 		archprop = new ArchivoPropiedades(fileParametros);
 		parametrosdao = new ParametrosDAO(archprop);
 		parametros = archprop.leerArchivo(fileParametros);
@@ -94,20 +94,20 @@ public class Controller implements ActionListener{
 		if(e.getActionCommand().equals(ventanaP.getPanelP().SEDES)) {
 			ventanaP.getPanelP().setVisible(false);
 			ventanaP.getPanelS().setVisible(true);
-			//ventanaP.resize(500,200);
+			ventanaP.resize(500,200);
 			ventanaP.setLocationRelativeTo(null);
 		}
 		
 		if(e.getActionCommand().equals(ventanaP.getPanelP().APOSTADORES)) {
 			ventanaP.getPanelP().setVisible(false);
 			ventanaP.getPanelO().setVisible(true);
-			//ventanaP.resize(500,200);
 			ventanaP.setLocationRelativeTo(null);
 		}
 		
 		//panelParametros
-		if(e.getActionCommand().equals(ventanaP.getPanelPa().CREAR)) {
+		if(e.getActionCommand().equals(ventanaP.getPanelPa().CREARAR)) {
 			archprop.crearArchivo(fileParametros);
+			
 		}
 		
 		if(e.getActionCommand().equals(ventanaP.getPanelPa().GUARDAR)) {
@@ -116,13 +116,13 @@ public class Controller implements ActionListener{
 			}
 			else {
 				if(parametrosdao.agregarParametros(ventanaP.getPanelPa().getTxtnombreCasa().getText(), ventanaP.getPanelPa().getTxtNumeroSedes().getText(), ventanaP.getPanelPa().getTxtPresupuestosTotales().getText(), parametros, fileParametros)) {
-					props.setNombre(ventanaP.getPanelPa().getTxtnombreCasa().getText()) ;
-					props.setNumSedes(ventanaP.getPanelPa().getTxtnombreCasa().getText());
-					props.setPresupuesto(ventanaP.getPanelPa().getTxtnombreCasa().getText());;
-					props.escribirPropiedades();
+					PropiedadesCasasDeApuestas props = new PropiedadesCasasDeApuestas();
+					props.escribirPropiedades(parametros.get(parametros.size()-1).getNombreCasa(), parametros.get(parametros.size()-1).getNumSedes(), parametros.get(parametros.size()-1).getPresupuesto());
 					ventanaP.mostrarMensaje("Parametros agregados correctamente", "EXITO");
-					//ventanaP.mostrarMensaje(parametrosdao.verParametros(parametros), "Parametros");
-					ventanaP.mostrarMensaje(archprop.verPropiedades(), "Parametros");
+					ventanaP.mostrarMensaje(archprop.verPropiedades(parametros.get(parametros.size()-1).getNombreCasa(), parametros.get(parametros.size()-1).getNumSedes(), parametros.get(parametros.size()-1).getPresupuesto()), "Parametros");
+					ventanaP.getPanelPa().getTxtnombreCasa().setText("");
+					ventanaP.getPanelPa().getTxtNumeroSedes().setText("");
+					ventanaP.getPanelPa().getTxtPresupuestosTotales().setText("");
 				}
 				else {
 					ventanaP.mostrarMensaje("Estos parametros ya se encuentran registrados", "ERROR");
@@ -130,8 +130,20 @@ public class Controller implements ActionListener{
 			}
 		}
 		
+		if(e.getActionCommand().equals(ventanaP.getPanelPa().MODIFICAR)) {
+			String nombre = ventanaP.capturarDato("Indique el nombre de la casa de los parametros que desea modificar", null);
+			if(parametrosdao.buscarParametros(nombre, parametros)!=null) {
+				parametrosdao.eliminarParametros(nombre, parametros, fileParametros);
+				ventanaP.mostrarMensaje("Al actualizar los datos oprima el boton GUARDAR para guardar los cambios", "INFO");
+			}
+			else {
+				ventanaP.mostrarMensaje("Parametros no encontrados", "ERROR");
+			}
+		}
+		
 		if(e.getActionCommand().equals(ventanaP.getPanelPa().VOLVER)) {
 			ventanaP.getPanelPa().setVisible(false);
+			ventanaP.getPanelO().setVisible(false);
 			ventanaP.getPanelP().setVisible(true);
 			ventanaP.resize(800,600);
 			ventanaP.setLocationRelativeTo(null);
@@ -167,6 +179,13 @@ public class Controller implements ActionListener{
 				ventanaP.mostrarMensaje("Apostador no encontrado", "ERROR");
 				
 			}
+		}
+		
+		if(e.getActionCommand().equals(ventanaP.getPanelO().VOLVER)) {
+			ventanaP.getPanelO().setVisible(false);
+			ventanaP.getPanelP().setVisible(true);
+			ventanaP.resize(800,600);
+			ventanaP.setLocationRelativeTo(null);
 		}
 		
 		if(e.getActionCommand().equals(ventanaP.getPanelR().CREAR)) { 
@@ -222,33 +241,74 @@ public class Controller implements ActionListener{
 		 
 		//panelEleccion
 		if(e.getActionCommand().equals(ventanaP.getPanelEleccion().BALOTO)) {
-			Baloto baloto = new Baloto(null, null, 0, 0);
-			juegosDao.agregarJuego(baloto.getNombreJuego(), baloto.getTipoJuego(), baloto.getPresupuestoJuego(), juegos, file);
-			ventanaP.mostrarMensaje(juegosDao.verJuegos(juegos), "juegos");
+			Baloto baloto = new Baloto(null, null, null, 0);
+			if(juegosDao.buscarJuego(ventanaP.getPanelEleccion().BALOTO, juegos)==null) {
+				juegosDao.agregarJuego(baloto.getNombreJuego(), baloto.getTipoJuego(), baloto.getPresupuestoJuego(), juegos, file);
+				ventanaP.mostrarMensaje(juegosDao.verJuego(ventanaP.getPanelEleccion().BALOTO,juegos), "Parametros del Baloto");
+			}
+			else {
+				ventanaP.mostrarMensaje(juegosDao.verJuego(ventanaP.getPanelEleccion().BALOTO,juegos), "Parametros del Baloto");
+			}
 		}
 		
 		if(e.getActionCommand().equals(ventanaP.getPanelEleccion().BETPLAY)) {
+			BetPlay betplay = new BetPlay(null, null, null);
+			if(juegosDao.buscarJuego(ventanaP.getPanelEleccion().BETPLAY, juegos)==null) {
+				juegosDao.agregarJuego(betplay.getNombreJuego(), betplay.getTipoJuego(), betplay.getPresupuestoJuego(), juegos, file);
+				ventanaP.mostrarMensaje(juegosDao.verJuego(ventanaP.getPanelEleccion().BETPLAY, juegos), "Parametros de BetPlay");
+			}
+			else {
+				ventanaP.mostrarMensaje(juegosDao.verJuego(ventanaP.getPanelEleccion().BETPLAY, juegos), "Parametros de BetPlay");
 			
+			}
 		}
+			
 		
 		if(e.getActionCommand().equals(ventanaP.getPanelEleccion().CHANCE)) {
-			Chance chance = new Chance(null, null, 0, null, 0);
-			juegosDao.agregarJuego(chance.getNombreJuego(), chance.getTipoJuego(), chance.getPresupuestoJuego(), juegos, file);
-			ventanaP.mostrarMensaje(juegosDao.verJuegos(juegos), "juegos");
+			Chance chance = new Chance(null, null, null, null, 0);
+			if(juegosDao.buscarJuego(ventanaP.getPanelEleccion().CHANCE, juegos)==null) {
+				juegosDao.agregarJuego(chance.getNombreJuego(), chance.getTipoJuego(), chance.getPresupuestoJuego(), juegos, file);
+				ventanaP.mostrarMensaje(juegosDao.verJuego(ventanaP.getPanelEleccion().CHANCE, juegos), "Parametros de Chance");
+			}
+			else {
+				ventanaP.mostrarMensaje(juegosDao.verJuego(ventanaP.getPanelEleccion().CHANCE, juegos), "Parametros de Chance");
+			
+			}
 		}
 		
 		if(e.getActionCommand().equals(ventanaP.getPanelEleccion().LOTERIA)) {
-			Loteria loteria = new Loteria(null, null, 0, null, 0, 0);
-			juegosDao.agregarJuego(loteria.getNombreJuego(), loteria.getTipoJuego(), loteria.getPresupuestoJuego(), juegos, file);
+			Loteria loteria = new Loteria(null, null, null, null, 0, 0);
+			if(juegosDao.buscarJuego(ventanaP.getPanelEleccion().LOTERIA, juegos)==null) {
+				juegosDao.agregarJuego(loteria.getNombreJuego(), loteria.getTipoJuego(), loteria.getPresupuestoJuego(), juegos, file);
+				ventanaP.mostrarMensaje(juegosDao.verJuego(ventanaP.getPanelEleccion().LOTERIA, juegos), "Parametros de Loteria");
+			}
+			else {
+				ventanaP.mostrarMensaje(juegosDao.verJuego(ventanaP.getPanelEleccion().LOTERIA, juegos), "Parametros de Loteria");
+			
+			}
 			
 		}
 		
 		if(e.getActionCommand().equals(ventanaP.getPanelEleccion().SUPERASTRO)) {
-			SuperAstro superastro = new SuperAstro(null, null, 0, 0, null);
-			juegosDao.agregarJuego(superastro.getNombreJuego(), superastro.getTipoJuego(), superastro.getPresupuestoJuego(), juegos, file);
+			SuperAstro superastro = new SuperAstro(null, null, null, 0, null);
+			if(juegosDao.buscarJuego(ventanaP.getPanelEleccion().SUPERASTRO, juegos)==null) {
+				juegosDao.agregarJuego(superastro.getNombreJuego(), superastro.getTipoJuego(), superastro.getPresupuestoJuego(), juegos, file);
+				ventanaP.mostrarMensaje(juegosDao.verJuego(ventanaP.getPanelEleccion().SUPERASTRO, juegos), "Parametros de SuperAstro");
+			}
+			else {
+				ventanaP.mostrarMensaje(juegosDao.verJuego(ventanaP.getPanelEleccion().SUPERASTRO, juegos), "Parametros de SuperAstro");
+			
+			}
 		}
 		
-		//PanelS
+		if(e.getActionCommand().equals(ventanaP.getPanelEleccion().VOLVER)) {
+			ventanaP.getPanelEleccion().setVisible(false);
+			ventanaP.getPanelP().setVisible(true);
+			ventanaP.resize(800,600);
+			ventanaP.setLocationRelativeTo(null);
+		}
+		
+		//PanelSedes
 		if(e.getActionCommand().equals(ventanaP.getPanelP().SEDES)) {
 			try {
 				archivosedes.crearArchivoSedes(filesedes);
@@ -280,6 +340,13 @@ public class Controller implements ActionListener{
 				ventanaP.mostrarMensaje("No hay sedes para mostrar", "ERROR");
 			}
 		}
+		
+		if(e.getActionCommand().equals(ventanaP.getPanelS().VOLVER)){
+			ventanaP.getPanelS().setVisible(false);
+			ventanaP.getPanelP().setVisible(true);
+			ventanaP.resize(800,600);
+			ventanaP.setLocationRelativeTo(null);
+		}
 	}
 	
 	public ArrayList<SedesDTO>getSedes(){
@@ -288,5 +355,6 @@ public class Controller implements ActionListener{
 	public ArrayList<ApostadoresDTO>getApostadores(){
 		return apostadores;
 	}
+	
 	
 }

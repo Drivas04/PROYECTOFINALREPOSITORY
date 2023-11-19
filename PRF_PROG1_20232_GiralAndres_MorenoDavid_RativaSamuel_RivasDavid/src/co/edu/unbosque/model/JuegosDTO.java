@@ -4,13 +4,13 @@ import java.io.Serializable;
 
 public class JuegosDTO implements Serializable{
 
-	private static final double serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
 	
 	private String nombreJuego;
 	private String tipoJuego;
-	private double presupuestoJuego;
+	private String presupuestoJuego;
 	
-	public JuegosDTO(String nombreJuego, String tipoJuego, double presupuestoJuego) {
+	public JuegosDTO(String nombreJuego, String tipoJuego, String presupuestoJuego) {
 		this.nombreJuego = nombreJuego;
 		this.tipoJuego = tipoJuego;
 		this.presupuestoJuego = presupuestoJuego;
@@ -32,11 +32,11 @@ public class JuegosDTO implements Serializable{
 		this.tipoJuego = tipoJuego;
 	}
 
-	public double getPresupuestoJuego() {
+	public String getPresupuestoJuego() {
 		return presupuestoJuego;
 	}
 
-	public void setPresupuestoJuego(double presupuestoJuego) {
+	public void setPresupuestoJuego(String presupuestoJuego) {
 		this.presupuestoJuego = presupuestoJuego;
 	}
 

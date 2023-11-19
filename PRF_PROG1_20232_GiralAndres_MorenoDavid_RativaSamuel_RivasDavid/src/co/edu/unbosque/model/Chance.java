@@ -2,14 +2,14 @@ package co.edu.unbosque.model;
 
 import java.io.Serializable;
 
-public class Chance extends Loteria implements Serializable{
+public class Chance extends JuegosDTO implements Serializable{
 
 	private static final long serialVersionUID = 1L;
 
 	private int numerosElegidos;
 	
-	public Chance(String nombreJuego, String tipoJuego, double presupuestoJuego, String[] nombre, int numerosElegidos) {
-		super(nombreJuego = "Chance", tipoJuego = "Chance", presupuestoJuego, nombre, 0, 0);
+	public Chance(String nombreJuego, String tipoJuego, String presupuestoJuego, String[] nombre, int numerosElegidos) {
+		super(nombreJuego = "Chance", tipoJuego = "Loteria", presupuestoJuego="$1.200.000.000");
 		this.numerosElegidos = numerosElegidos;
 	}
 
