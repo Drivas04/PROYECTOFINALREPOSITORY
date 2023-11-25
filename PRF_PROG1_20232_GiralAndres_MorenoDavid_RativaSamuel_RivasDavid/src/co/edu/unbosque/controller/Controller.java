@@ -876,7 +876,7 @@ public class Controller implements ActionListener {
 		
 		//panelConsultas
 		if(e.getActionCommand().equals(ventanaP.getPanelCon().CLIENTESSEDE)) {
-			String dato=ventanaP.capturarDato("Ingrese la sede: \nSedes registradas hasta ahora: \n"+ f.getSedesDAO().verUbicaciones(f.getSedes()), "INFORMACION");
+			String dato=ventanaP.capturarDato("Ingrese la sede:  \nSedes registradas hasta ahora: \n"+ f.getSedesDAO().verUbicaciones(f.getSedes()), "INFORMACION");
 			boolean existe = false;
 			String cedula="";
 			for(int i=0;i<f.getSedes().size();i++) {
