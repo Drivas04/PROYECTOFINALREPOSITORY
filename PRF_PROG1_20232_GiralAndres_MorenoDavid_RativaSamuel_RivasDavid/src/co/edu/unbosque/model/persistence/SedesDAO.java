@@ -21,6 +21,14 @@ public class SedesDAO {
 		return text;
 
 	}
+	
+	public String verUbicaciones(ArrayList<SedesDTO> sedes) {
+		String text = "";
+		for(int i=0;i<sedes.size();i++) {
+			text = text.concat(sedes.get(i).getUbicacion()+"\n");
+		}
+	return text;
+	}
 
 	public SedesDTO buscarSede(String ubicacion, ArrayList<SedesDTO> sedes) {
 		SedesDTO encontrado = null;
@@ -45,6 +53,27 @@ public class SedesDAO {
 		} else {
 			return false;
 		}
+	}
+	
+	public boolean eliminarSede(String ubicacion, ArrayList<SedesDTO> sedes, File filesedes) {
+		boolean resp=false;
+		try {
+			SedesDTO e = buscarSede(ubicacion, sedes);
+			if(e!=null) {
+				sedes.remove(e);
+				filesedes.delete();
+				filesedes.createNewFile();
+				archivosedes.guardarArchivoSedes(sedes, filesedes);
+				resp= true;
+			}
+			return resp;
+		} catch (Exception e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+			
+		}
+		return resp;
+
 	}
 
 }

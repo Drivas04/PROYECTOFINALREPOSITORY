@@ -8,14 +8,14 @@ public class ParametrosDTO implements Serializable{
 
 	private static final long serialVersionUID = 1L;
 	
-	private PropiedadesCasasDeApuestas props;
+	//private PropiedadesCasasDeApuestas props;
 	
 	private String nombreCasa;
 	private String numSedes;
 	private String presupuesto;
 	
 	public ParametrosDTO(String nombre, String numSedes, String presupuesto) {
-		props = new PropiedadesCasasDeApuestas();
+		//props = new PropiedadesCasasDeApuestas();
 		this.nombreCasa = nombre;
 		this.numSedes = numSedes;
 		this.presupuesto = presupuesto;

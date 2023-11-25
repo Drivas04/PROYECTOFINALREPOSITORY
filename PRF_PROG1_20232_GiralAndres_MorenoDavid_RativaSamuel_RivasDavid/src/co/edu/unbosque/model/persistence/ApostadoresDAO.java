@@ -17,8 +17,8 @@ public class ApostadoresDAO {
 		this.archivo=archivo;
 	}
 	
-	public boolean AgregarApostador(String nombre,String cedula,String direccion,String celular,String edad,ArrayList<ApostadoresDTO>apostadores,File file) {
-		ApostadoresDTO nuevo=new ApostadoresDTO(nombre,cedula,celular,direccion,edad);
+	public boolean AgregarApostador(String nombre,String cedula,String sede, String direccion,String celular,String edad,ArrayList<ApostadoresDTO>apostadores,File file) {
+		ApostadoresDTO nuevo=new ApostadoresDTO(nombre,cedula, sede,celular,direccion,edad);
 		if(BuscarApostador(cedula, apostadores)==null) {
 			apostadores.add(nuevo);
 			archivo.EscribirArchivo(apostadores, file);
@@ -37,6 +37,15 @@ public class ApostadoresDAO {
 		return texto;
 	}
 	
+public String LeerCedulaApostador(String cedula, ArrayList<ApostadoresDTO>apostadores) {
+		
+		String texto="";
+		for(int i = 0;i<apostadores.size();i++) {
+			texto=texto.concat(apostadores.get(i).toString()+"\n");
+		}
+		return texto;
+	}
+
 	public ApostadoresDTO BuscarApostador(String cedula, ArrayList<ApostadoresDTO> apostadores) {
 		
 		ApostadoresDTO encontrado=null;

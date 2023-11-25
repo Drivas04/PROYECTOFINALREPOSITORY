@@ -9,18 +9,18 @@ import javax.swing.*;
 
 public class PanelRegistroUsuario extends JPanel {
 	
-	private JLabel nombre,cedula,celular,direccion,edad;
-	private JTextField CampoNombre,CampoCedula, CampoCelular,CampoDireccion,CampoEdad;
+	private JLabel nombre,cedula, sede,celular,direccion,edad;
+	private JTextField CampoNombre,CampoCedula ,campoSede, CampoCelular,CampoDireccion,CampoEdad;
 	private JButton BotonCrear,volver;
 	private ImageIcon fondo;
 	
-	public static final String CREAR="crear";
-	public static final String VOLVER="volver";
+	public static final String CREARAP="crearapostador";
+	public static final String VOLVER="volveraopciones";
 	
 	public PanelRegistroUsuario(String ruta) {
 		fondo = new ImageIcon(ruta);
 		setBounds(0,0,500,500);
-		setLayout(new GridLayout(6,2,15,15));
+		setLayout(new GridLayout(7,2,15,15));
 		setBackground(Color.white);
 	
 		nombre=new JLabel("Nombre");
@@ -36,6 +36,10 @@ public class PanelRegistroUsuario extends JPanel {
 		add(cedula);
 		CampoCedula=new JTextField("");
 		add(CampoCedula);
+		sede = new JLabel("Sede en la que va a jugar");
+		add(sede);
+		campoSede = new JTextField();
+		add(campoSede);
 		celular=new JLabel("Celular");
 		add(celular);
 		CampoCelular=new JTextField("");
@@ -45,7 +49,7 @@ public class PanelRegistroUsuario extends JPanel {
 		CampoDireccion=new JTextField("");
 		add(CampoDireccion);
 		BotonCrear=new JButton("Crear Apostador");
-		BotonCrear.setActionCommand(CREAR);
+		BotonCrear.setActionCommand(CREARAP);
 		add(BotonCrear);
 		volver=new JButton("Volver");
 		volver.setActionCommand(VOLVER);
@@ -136,20 +140,30 @@ public class PanelRegistroUsuario extends JPanel {
 		CampoEdad = campoEdad;
 	}
 
-	public static String getCrear() {
-		return CREAR;
-	}
 
 	public void setVolver(JButton volver) {
 		this.volver = volver;
 	}
 
-	public static String getCREAR() {
-		return CREAR;
-	}
 
 	public static String getVOLVER() {
 		return VOLVER;
+	}
+
+	public JLabel getSede() {
+		return sede;
+	}
+
+	public void setSede(JLabel sede) {
+		this.sede = sede;
+	}
+
+	public JTextField getCampoSede() {
+		return campoSede;
+	}
+
+	public void setCampoSede(JTextField campoSede) {
+		this.campoSede = campoSede;
 	}
 	
 	

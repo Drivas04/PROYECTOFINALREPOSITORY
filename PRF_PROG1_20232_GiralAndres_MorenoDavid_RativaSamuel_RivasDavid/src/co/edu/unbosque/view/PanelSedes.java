@@ -25,13 +25,15 @@ public class PanelSedes extends JPanel {
 	private JButton butCrearArchivo;
 	private JButton butGuardar;
 	private JButton butverSedes;
+	private JButton butEliminar;
 	private JButton butVolver;
 	
 	private ImageIcon fondo;
 	
-	public static final String CREAR="Crear";
-	public static final String GUARDAR="Guardar";
-	public static final String VER="Ver";
+	public static final String CREAR="CrearS";
+	public static final String GUARDAR="GuardarS";
+	public static final String VER="VerS";
+	public static final String ELIMINAR="EliminarS";
 	public static final String VOLVER="Volver";
 	
 	public PanelSedes(String ruta) {
@@ -64,21 +66,28 @@ public class PanelSedes extends JPanel {
 		butverSedes.setBounds(460, 260, 145, 35);
 		butverSedes.setActionCommand(VER);
 		
+		butEliminar= new JButton("Eliminar");
+		butEliminar.setBounds(320, 460, 154, 35);
+		butEliminar.setActionCommand(ELIMINAR);
+		
 		butVolver = new JButton("Volver");
 		butVolver.setBounds(320, 460, 145, 35);
 		butVolver.setActionCommand(VOLVER);
 		
 		add(Ubicacion);
 		add(TxtUbicacion);
+		
 		add(butVolver);
 		
 		add(NumEmpleados);
 		add(TxtNumEmpleados);
-		add(empty);
+		add(butEliminar);
+		
 		
 		add(butCrearArchivo);
 		add(butGuardar);
 		add(butverSedes);
+		
 		
 	}
 
@@ -170,6 +179,14 @@ public class PanelSedes extends JPanel {
 
 	public void setButVolver(JButton butVolver) {
 		this.butVolver = butVolver;
+	}
+
+	public JButton getButEliminar() {
+		return butEliminar;
+	}
+
+	public void setButEliminar(JButton butEliminar) {
+		this.butEliminar = butEliminar;
 	}
 	
 	

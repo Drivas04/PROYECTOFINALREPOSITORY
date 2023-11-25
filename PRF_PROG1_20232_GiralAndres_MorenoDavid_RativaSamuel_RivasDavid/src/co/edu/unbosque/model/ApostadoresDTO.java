@@ -10,20 +10,22 @@ public class ApostadoresDTO implements Serializable{
 	private static final long serialVersionUID = 1L;
 	private String nombre;
 	private String cedula;
+	private String sede;
 	private String direccion;
 	private String celular;
 	private String edad;
 	
-	public ApostadoresDTO(String nombre, String cedula, String direccion, String celular,String edad) {
+	public ApostadoresDTO(String nombre, String cedula, String sede, String direccion, String celular,String edad) {
      
 		this.nombre = nombre;
 		this.cedula = cedula;
+		this.sede = sede;
 		this.direccion = direccion;
 		this.celular = celular;
 		this.edad=edad;
 	}
 	public String toString() {
-		return "Apostador [nombre = " + getNombre() + ", cedula = " + getCedula() +", edad = " +getEdad()+ ", celular = " + getCelular() + ", direccion = " +getDireccion()+ "]";
+		return "Apostador [nombre = " + getNombre() + ", cedula = " + getCedula() +", sede = "+getSede()+", edad = " +getEdad()+ ", celular = " + getCelular() + ", direccion = " +getDireccion()+ "]";
 	}
 
 
@@ -39,6 +41,12 @@ public class ApostadoresDTO implements Serializable{
 		return cedula;
 	}
 
+	public String getSede() {
+		return sede;
+	}
+	public void setSede(String sede) {
+		this.sede = sede;
+	}
 	public void setCedula(String cedula) {
 		this.cedula = cedula;
 	}

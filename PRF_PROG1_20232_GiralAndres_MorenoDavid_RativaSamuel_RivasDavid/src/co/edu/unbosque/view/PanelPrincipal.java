@@ -21,15 +21,19 @@ public class PanelPrincipal extends JPanel{
 	private JLabel titulo;
 	private JLabel empty;
 	private ImageIcon fondo;
-	private JButton btnIngresar;
+	private JButton btnVerPropJuegos;
 	private JButton btnSedes;
 	private JButton btnParametros;
 	private JButton btnApostadores;
+	private JButton btnApostar;
+	private JButton btnConsultas;
 	
-	public static final String INGRESAR = "ingresar";
+	public static final String VERPROPJUEGOS = "verpropjuegos";
 	public static final String SEDES = "sedes";
 	public static final String PARAMETROS = "parametros";
 	public static final String APOSTADORES = "apostadores";
+	public static final String APOSTAR = "apostar";
+	public static final String CONSULTAR = "consultar";
 
 	public PanelPrincipal(String ruta) {
 		fondo = new ImageIcon(ruta);
@@ -44,6 +48,7 @@ public class PanelPrincipal extends JPanel{
 		add(empty);
 		
 		btnParametros = new JButton("Parametros");
+		btnParametros.setFont(FontBoton);
 		btnParametros.setActionCommand(PARAMETROS);
 		add(btnParametros, new GridBagConstraints (0, 0, 1, 1, 0, 0,
                 GridBagConstraints.NORTHWEST,
@@ -90,17 +95,35 @@ public class PanelPrincipal extends JPanel{
 		empty = new JLabel();
 		add(empty);
 		
-		btnIngresar = new JButton("Ingresar");
-		btnIngresar.setSize(240, 50);
+		btnVerPropJuegos = new JButton("Propiedades de juegos");
+		btnVerPropJuegos.setSize(240, 50);
 		//btnIngresar.setLocation(800/2, 450);
-		btnIngresar.setFont(FontBoton);
-		btnIngresar.setActionCommand(INGRESAR);
-		add(btnIngresar, new GridBagConstraints (0, 0, 1, 1, 1, 1,
+		btnVerPropJuegos.setFont(FontBoton);
+		btnVerPropJuegos.setActionCommand(VERPROPJUEGOS);
+		add(btnVerPropJuegos, new GridBagConstraints (0, 0, 1, 1, 1, 1,
+                GridBagConstraints.SOUTHWEST,
+                GridBagConstraints.SOUTH,
+                new Insets (0,0,0,0), 0, 0));
+		
+		btnApostar = new JButton("Apostar!");
+		btnApostar.setSize(100, 30);
+		btnApostar.setLocation(640, 20);
+		btnApostar.setFont(FontBoton);
+		btnApostar.setActionCommand(APOSTAR);
+		add(btnApostar, new GridBagConstraints (0, 0, 1, 1, 0, 0,
                 GridBagConstraints.SOUTH,
                 GridBagConstraints.SOUTH,
                 new Insets (0,0,0,0), 0, 0));
 		
-		
+		btnConsultas = new JButton("Consultar");
+		btnConsultas.setSize(100, 30);
+		btnConsultas.setLocation(640, 20);
+		btnConsultas.setFont(FontBoton);
+		btnConsultas.setActionCommand(CONSULTAR);
+		add(btnConsultas, new GridBagConstraints (0, 0, 1, 1, 0, 0,
+                GridBagConstraints.SOUTHEAST,
+                GridBagConstraints.SOUTH,
+                new Insets (0,0,0,0), 0, 0));
 		//agregarConstrains();
 	}
 	
@@ -137,12 +160,14 @@ public class PanelPrincipal extends JPanel{
 	}
 
 
-	public JButton getBtnIngresar() {
-		return btnIngresar;
+	
+
+	public JButton getBtnVerPropJuegos() {
+		return btnVerPropJuegos;
 	}
 
-	public void setBtnIngresar(JButton btnIngresar) {
-		this.btnIngresar = btnIngresar;
+	public void setBtnVerPropJuegos(JButton btnVerPropJuegos) {
+		this.btnVerPropJuegos = btnVerPropJuegos;
 	}
 
 	public JButton getBtnSedes() {
@@ -167,6 +192,22 @@ public class PanelPrincipal extends JPanel{
 
 	public void setBtnApostadores(JButton btnApostadores) {
 		this.btnApostadores = btnApostadores;
+	}
+
+	public JButton getBtnApostar() {
+		return btnApostar;
+	}
+
+	public void setBtnApostar(JButton btnApostar) {
+		this.btnApostar = btnApostar;
+	}
+
+	public JButton getBtnConsultas() {
+		return btnConsultas;
+	}
+
+	public void setBtnConsultas(JButton btnConsultas) {
+		this.btnConsultas = btnConsultas;
 	}
 	
 	
