@@ -1,4 +1,4 @@
-package co.edu.unbosque.model.persistence;
+package co.edu.unbosque.view;
 
 import java.awt.GridLayout;
 
