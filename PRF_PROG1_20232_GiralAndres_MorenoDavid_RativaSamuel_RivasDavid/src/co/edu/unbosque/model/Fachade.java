@@ -43,9 +43,10 @@ public class Fachade {
 	private ArchivoChance archC;
 	private ChanceDAO chancedao;
 	private File fileC = new File("Data/apuestas-chance.dat");
-	private LoteriaDTO lot;
+	
 	
 	private ArrayList<LoteriaDTO> loteria;
+	private LoteriaDTO lot;
 	private ArchivoLoteria archL;
 	private LoteriaDAO loteriadao;
 	private File fileL = new File("Data/apuestas-loteria.dat");

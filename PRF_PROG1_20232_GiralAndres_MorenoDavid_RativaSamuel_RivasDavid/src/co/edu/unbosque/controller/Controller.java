@@ -487,8 +487,6 @@ public class Controller implements ActionListener {
 						f.getSedes().get(f.getSedes().size() - 1).getUbicacion(), f.getFecha().toString(), "$5000",
 						f.getLoteria(), f.getFileL())) {
 					ventanaP.mostrarMensaje("Apuesta guardada exitosamente", "INFORMACION");
-					// ventanaP.mostrarMensaje(f.getBalotodao().verApBaloto(ventanaP.getPanelBa().getTxtNumeros().getText(),
-					// f.getBaloto()), null);
 				} else {
 					ventanaP.mostrarMensaje("Error al guardar apuesta", "ERROR");
 				}
@@ -541,8 +539,8 @@ public class Controller implements ActionListener {
 						f.getSedes().get(f.getSedes().size() - 1).getUbicacion(), f.getFecha().toString(), ventanaP.getPanelSA().getTxtvalorap().getText(),
 						f.getSuperas(), f.getFileSA())) {
 					ventanaP.mostrarMensaje("Apuesta guardada exitosamente", "INFORMACION");
-					// ventanaP.mostrarMensaje(f.getBalotodao().verApBaloto(ventanaP.getPanelBa().getTxtNumeros().getText(),
-					// f.getBaloto()), null);
+					
+					
 				} else {
 					ventanaP.mostrarMensaje("Error al guardar apuesta", "ERROR");
 				}
@@ -834,6 +832,7 @@ public class Controller implements ActionListener {
 					|| ventanaP.getPanelS().getTxtNumEmpleados().getText().isEmpty()) {
 				ventanaP.mostrarMensaje("Agregar todos los campos", "ERROR");
 			}
+			if(f.getSedes().size()<Integer.parseInt(f.getParametros().get(f.getParametros().size()-1).getNumSedes())) {
 			if (f.getSedesDAO().guardarSede(ventanaP.getPanelS().getTxtUbicacion().getText(),
 					Integer.parseInt(ventanaP.getPanelS().getTxtNumEmpleados().getText()), f.getSedes(),
 					f.getFilesedes())) {
@@ -842,7 +841,9 @@ public class Controller implements ActionListener {
 			} else {
 				ventanaP.mostrarMensaje("Error al guardar sede", "ERROR");
 			}
-
+			}else {
+				ventanaP.mostrarMensaje("No se pueden crear mas sedes", "ERROR");
+			}
 		}
 
 		if (e.getActionCommand().equals(ventanaP.getPanelS().VER)) {
