@@ -27,6 +27,7 @@ public class ChanceDTO extends LoteriaDTO implements Serializable{
 		this.numerosElegidos = numerosElegidos;
 	}
 	
+	
 	@Override
 	public String toString() {
 		// TODO Auto-generated method stub

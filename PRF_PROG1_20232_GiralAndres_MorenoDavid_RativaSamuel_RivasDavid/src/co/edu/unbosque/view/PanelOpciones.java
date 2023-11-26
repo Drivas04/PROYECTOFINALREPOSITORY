@@ -31,7 +31,7 @@ public class PanelOpciones extends JPanel {
 		Actualizar=new JButton("Actualizar datos de apostador");
 		Actualizar.setActionCommand(ACTUALIZAR);
 		add(Actualizar);
-		Borrar=new JButton("Borras datos de apostador");
+		Borrar=new JButton("Borrar datos de apostador");
 		Borrar.setActionCommand(BORRAR);
 		add(Borrar);
 		volver = new JButton("Volver");
