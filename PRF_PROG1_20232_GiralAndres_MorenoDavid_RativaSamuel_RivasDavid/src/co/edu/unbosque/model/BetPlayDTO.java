@@ -10,7 +10,7 @@ public class BetPlayDTO extends JuegosDTO implements Serializable{
 	private String equipoGanador, equipoGanador2, equipoGanador3, equipoGanador4, equipoGanador5, equipoGanador6, equipoGanador7, equipoGanador8, equipoGanador9, equipoGanador10, equipoGanador11, equipoGanador12, equipoGanador13, equipoGanador14;
 	
 	public BetPlayDTO(String nombreJuego, String tipoJuego, String presupuestoJuego) {
-		super(nombreJuego="BetPlay", tipoJuego="Deportiva", presupuestoJuego="$ 5.000.000.000");
+		super(nombreJuego="BetPlay", tipoJuego="Deportiva", presupuestoJuego="$ 500.000.000");
 	}
 
 	public BetPlayDTO(String id, String cedula, String sede, String fechaApuesta, String valorAp, String ganador, String ganador2, String ganador3, String ganador4, String ganador5, String ganador6, String ganador7, String ganador8, String ganador9, String ganador10, String ganador11, String ganador12, String ganador13, String ganador14) {

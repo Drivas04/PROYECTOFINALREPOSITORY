@@ -11,7 +11,7 @@ public class SuperAstroDTO extends JuegosDTO implements Serializable{
 	private String signo;
 	
 	public SuperAstroDTO(String nombreJuego , String tipoJuego, String presupuestoJuego) {
-		super(nombreJuego = "SuperAstro", tipoJuego = "Loteria", presupuestoJuego="$4.000.000.000");
+		super(nombreJuego = "SuperAstro", tipoJuego = "Loteria", presupuestoJuego="$1.200.000.000");
 	}
 	
 	public SuperAstroDTO(String cedula, String numCifras, String signoZodiacal, String sede, String fechaApuesta, String valorAp) {

@@ -15,7 +15,7 @@ public class LoteriaDTO extends JuegosDTO implements Serializable{
 	
 	
 	public LoteriaDTO(String nombreJuego, String tipoJuego, String presupuestoJuego) {
-		super(nombreJuego = "Loteria", tipoJuego = "Loteria", presupuestoJuego = "$150.000.000.000");
+		super(nombreJuego = "Loteria", tipoJuego = "Loteria", presupuestoJuego = "$620.000.000");
 	}
 	
 	public LoteriaDTO(String cedula, String nombreL, String numNumeros, String numSeries, String sede, String fechaApuesta, String valorAp) {
